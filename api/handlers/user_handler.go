@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
 
 	dbstores "github.com/alijabbar034/hotelManagement/api/db_stores"
@@ -82,7 +83,8 @@ func (h *UserHandler) LoginUserHandler(c *gin.Context) {
 		utils.ErrorHandler(c, http.StatusBadRequest, errors.New("Invalid login password or email"))
 		return
 	}
-	utils.SendToken(c, usr.ID)
+	id := usr.ID.Hex()
+	utils.SendToken(c, id)
 }
 
 func (h *UserHandler) GetByIdHandler(c *gin.Context) {
@@ -143,7 +145,8 @@ func (h *UserHandler) UpdateUserHandler(c *gin.Context) {
 		utils.ErrorHandler(c, http.StatusBadRequest, err)
 		return
 	}
-	updateCount, eror := h.userStorer.UpdateUser(user, usr.ID)
+	id := usr.ID.Hex()
+	updateCount, eror := h.userStorer.UpdateUser(user, id)
 	if eror != nil {
 		utils.ErrorHandler(c, http.StatusInternalServerError, eror)
 		return
@@ -156,6 +159,7 @@ func (h *UserHandler) UpdateUserHandler(c *gin.Context) {
 
 func (h *UserHandler) GetProfileHandler(c *gin.Context) {
 	reqUser, _ := c.Get("user")
+	fmt.Println("GET", reqUser)
 	user := reqUser.(types.User)
 	c.JSON(http.StatusOK, gin.H{
 		"user": user,

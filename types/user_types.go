@@ -4,15 +4,17 @@ import (
 	"errors"
 	"fmt"
 	"strings"
+
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type User struct {
-	ID        string `json:"_id,omitempty" bson:"_id,omitempty"`
-	FirstName string `json:"first_name,omitempty" bson="first_name,omitempty"`
-	LastName  string `json:"last_name,omitempty" bson:"last_name,omitempty"`
-	Email     string `json:"email,omitempty" bson:"email,omitempty"`
-	Password  string `json:"password" bson:"password,omitempty"`
-	Role      string `json:"role,omitempty" bson:"role,omitempty"`
+	ID        primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
+	FirstName string             `json:"first_name,omitempty" bson="first_name,omitempty"`
+	LastName  string             `json:"last_name,omitempty" bson:"last_name,omitempty"`
+	Email     string             `json:"email,omitempty" bson:"email,omitempty"`
+	Password  string             `json:"password" bson:"password,omitempty"`
+	Role      string             `json:"role,omitempty" bson:"role,omitempty"`
 }
 
 func NewUser(user User) *User {

@@ -11,6 +11,8 @@ func main() {
 	app := gin.Default()
 	api := app.Group("/api")
 	routes.UserRoutes(api, db)
+	routes.RoomRoutes(api, db)
+	routes.BookingRoutes(api, db)
 
 	app.Run(":3000")
 
