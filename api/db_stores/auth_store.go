@@ -2,7 +2,6 @@ package dbstores
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/alijabbar034/hotelManagement/types"
 	"go.mongodb.org/mongo-driver/bson"
@@ -25,7 +24,7 @@ func NewAuthMongo(db *mongo.Database) *AuthMongo {
 }
 
 func (auth *AuthMongo) FindUser(id string) (*types.User, error) {
-	fmt.Println("ffffffffffffffffffffffff", id)
+
 	_id, _ := primitive.ObjectIDFromHex(id)
 	var user types.User
 	err := auth.coll.FindOne(context.TODO(), bson.M{"_id": _id}).Decode(&user)
