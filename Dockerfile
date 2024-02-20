@@ -8,7 +8,7 @@ RUN go mod download && go mod verify
 
 COPY . .
 
-RUN go build -o myapp main.go ./
+RUN go build -o myapp ./
 
 EXPOSE 3000
 
